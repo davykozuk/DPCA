@@ -12,6 +12,7 @@ $Xaml = @"
         <TextBox HorizontalAlignment="Left" Height="30" Margin="10,32.309,0,0" TextWrapping="Wrap" Text="Saisir le nom du poste" VerticalAlignment="Top" Width="150" Name="TPoste"/>
         <Button Content="Check" HorizontalAlignment="Left" Margin="43.828,67.309,0,0" VerticalAlignment="Top" Width="75" Name="BCheck"/>
         <Button Content="Clean" HorizontalAlignment="Left" Margin="43.828,263.718,0,0" VerticalAlignment="Top" Width="75" Name="BClean"/>
+        <Button Content="Check-Wifi" HorizontalAlignment="Left" Margin="43.828,92.269,0,0" VerticalAlignment="Top" Width="75" Name="BCheckWifi"/>
 </Grid>
 </Window>
 "@
@@ -72,6 +73,12 @@ Remove-Item -Path "\\$Poste\c$\temp\installDP.bat"
 Remove-Item -Path "\\$Poste\c$\temp\uninstallDP.bat"
 Remove-Item -Path "\\$Poste\c$\temp\DisplayLink_Win10RS.msi"}
 
+Function FCheckwifi(){
+$Poste=$TPoste.Text
+$wifi=systeminfo /s $Poste
+write-host $wifi
+}
+
 
 
 
@@ -94,6 +101,7 @@ $BInstaller.Add_Click({FInstaller $this $_})
 $BDesinstaller.Add_Click({FDesinstaller $this $_})
 $BCheck.Add_Click({FCheck $this $_})
 $BClean.Add_Click({FClean $this $_})
+$BCheckwifi.Add_Click({FCheckwifi $this $_})
 
 
 [void]$Window.ShowDialog()
